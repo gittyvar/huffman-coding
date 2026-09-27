@@ -26,5 +26,7 @@ int main()
         mapper(line);
     }
 
+    cout << "Map: " << endl;
     printMap(freqMap);
+    makeTree();
 }
