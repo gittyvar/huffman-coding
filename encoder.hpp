@@ -56,6 +56,26 @@ struct Compare
     }
 };
 
+map<char, string> huffmanMap;
+
+void generateCodes(Node *root, string code)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (root->left == NULL && root->right == NULL)
+    {
+        huffmanMap[root->c] = code;
+        // cout << root->c << ": " << code << endl;
+        return;
+    }
+
+    generateCodes(root->left, code + "0");
+
+    generateCodes(root->right, code + "1");
+}
+
 void makeTree()
 {
     // making pairs
@@ -100,4 +120,7 @@ void makeTree()
 
     cout << "Inorder Traversal of a valid Huffman Tree: " << endl;
     printTree(root);
+    cout << endl;
+    // cout << "The Codes: " << endl;
+    generateCodes(root, "");
 }

@@ -14,6 +14,14 @@ void printMap(map<char, int> freqMap)
     }
 }
 
+void printHuffmanMap(map<char, string> freqMap)
+{
+    for (auto &[key, freq] : freqMap)
+    {
+        cout << key << ": " << freq << endl;
+    }
+}
+
 int main()
 {
     ifstream inputFile("input.txt");
@@ -28,5 +36,8 @@ int main()
 
     cout << "Map: " << endl;
     printMap(freqMap);
+    cout << endl;
     makeTree();
+    cout << "Huffman Map: " << endl;
+    printHuffmanMap(huffmanMap);
 }
