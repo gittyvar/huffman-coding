@@ -14,9 +14,9 @@ void printMap(map<char, int> freqMap)
     }
 }
 
-void printHuffmanMap(map<char, string> freqMap)
+void printHuffmanMap(map<char, string> huffmanMap)
 {
-    for (auto &[key, freq] : freqMap)
+    for (auto &[key, freq] : huffmanMap)
     {
         cout << key << ": " << freq << endl;
     }
@@ -25,6 +25,7 @@ void printHuffmanMap(map<char, string> freqMap)
 int main()
 {
     ifstream inputFile("input.txt");
+    ofstream outputFile("output.txt");
 
     string line;
 
@@ -40,4 +41,27 @@ int main()
     makeTree();
     cout << "Huffman Map: " << endl;
     printHuffmanMap(huffmanMap);
+
+    inputFile.clear();
+    inputFile.seekg(0);
+
+    string lineToEncode;
+
+    for (auto &[key, freq] : huffmanMap)
+    {
+        outputFile << (int)key << " " << freq << endl;
+    }
+
+    while (getline(inputFile, lineToEncode))
+    {
+        string encodedString = "";
+        for (int i = 0; i < lineToEncode.size(); i++)
+        {
+            encodedString += huffmanMap[lineToEncode[i]];
+        }
+        outputFile << encodedString;
+    }
+    inputFile.close();
+    outputFile.close();
+    return 0;
 }
